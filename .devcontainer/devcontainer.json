@@ -1,0 +1,42 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/alpine
+{
+	// 名前を決める
+	"name": "PlatformIO (Community)",
+	//Dockerファイルを指定
+	"dockerFile": "Dockerfile",
+	//dockerをカスタマイズ
+	"customizations": {
+		//vscodeの設定
+		"vscode": {
+			"settings": {
+				//ターミナルシェルをzshに指定
+				"terminal.integrated.defaultProfile.linux": "zsh"
+			},
+			//拡張機能
+			"extensions": [
+				//c++の拡張機能
+				"ms-vscode.cpptools",
+				//platformIO IDE
+				"platformio.platformio-ide"
+			]
+		}
+	},
+	//使用するポートの指定
+	"forwardPorts": [
+		8008
+	],
+	//接続するArduinoやM5のマウント設定
+	"mounts": [
+		"source=/dev/,target=/dev/,type=bind,consistency=consistent"
+	],
+	//ホストに接続されたすべてのデバイスへのアクセスを許可
+	"runArgs": [
+		"--privileged"
+	],
+	//python環境も入れておく
+	"features": {
+		"ghcr.io/devcontainers/features/python:1": {}
+	},
+	"postAttachCommand": "sudo service udev restart"
+}
